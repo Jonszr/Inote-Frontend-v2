@@ -3,19 +3,22 @@ import React, { useState } from "react";
 import { useEffect } from "react";
 import { Navigate, useLocation, useNavigate, useOutletContext } from "react-router-dom";
 import { useUpdateUserMutation } from "../../store/userApi";
+import { useDispatch } from "react-redux";
+import { setUser } from "../../store/userSlice";
 
 export default function () {
   const navigate = useNavigate();
   const { isUser, data} = useOutletContext();
   const [updateUser, { isLoading,data:fetchdata,isSuccess}] = useUpdateUserMutation();
   const [img, setImg] = useState();
+  const dispatch = useDispatch();
   const onImageChange = (e) => {
     const [file] = e.target.files;
     setImg(URL.createObjectURL(file));
   
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     
     const [photo,name,email,about] = e.target;
@@ -28,9 +31,16 @@ export default function () {
     name.value && user.append("name",name.value);
     email.value && user.append("email", email.value)
     about.value && user.append("about",about.value)
+    try{
+      const payload = await updateUser({ userId: data._id, user }).unwrap();
+      console.log("update user success", payload.user);
+      dispatch(setUser({...payload}));
+      navigate('/usercenter/'+data._id);
+    }catch(error){
+      console.log("update user Failed", error);
+    }
+
     
-    updateUser({ userId: data._id, user });
-    navigate('/usercenter/'+data._id);
     
   };
   return (

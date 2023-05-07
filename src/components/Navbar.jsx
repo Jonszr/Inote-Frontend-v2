@@ -44,7 +44,7 @@ export default function Navbar() {
           </h1>
           <ul className="hidden md:flex list-none text-zinc-400">
             <li>
-              <NavLink to={"/home"}>Home</NavLink>
+              <NavLink to={"/"}>Home</NavLink>
             </li>
 
             {/* <li>

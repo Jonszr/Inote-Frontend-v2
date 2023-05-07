@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import { useDispatch } from "react-redux";
 import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import { useLoginMutation } from "../../store/userApi";
@@ -7,33 +7,29 @@ import { login } from "../../store/userSlice";
 export default function Signin() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [signin, { isError, isSuccess, isLoading, data }] = useLoginMutation();
-
+  const [signin, { isError }] = useLoginMutation();
+  const [alert, setAlert] = useState();
   const location = useLocation()
   const from = location.state?.preLocation?.pathname || '/home';
   
 
 
-  const handleSignin = (e) => {
+  const handleSignin = async(e) => {
     e.preventDefault();
     console.log(from);
     const user = { email: e.target[0].value, password: e.target[1].value };
     if (user.email&&user.password) {
-      signin({ email: user.email, password: user.password }).then(
-        (result) => {
-          console.log(result.data)
-          
-            if(result.data){
-              dispatch(login(result.data));
-              navigate(from,{replace:true}) 
-            }
-            if(result.error){
-              console.log(result.error)
-            }
+      try {
+        const payload = await signin({ email: user.email, password: user.password }).unwrap();
+        console.log(payload)
+        if(payload){
+          dispatch(login(payload));
+          navigate(from,{replace:true}) 
         }
-      ).catch(err=>{
-        console.log(err)
-      });
+      } catch (error) {
+        setAlert(error.data.error);
+        console.error('rejected', error);
+      }
     }
   };
 
@@ -58,8 +54,7 @@ export default function Signin() {
               ></path>
             </svg>
             <div>
-              <span className="font-medium">login Failed!</span> Account is not
-              existing or password is wrong.
+              <span className="font-medium">login Failed!</span> {alert}
             </div>
           </div>
         )}

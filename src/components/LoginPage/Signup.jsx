@@ -2,13 +2,11 @@ import React, { useState } from "react";
 import { useSignupMutation } from "../../store/userApi";
 
 export default function Signup() {
-  const [alert, setAlert] = useState({
-    error: null,
-  });
+  const [alert, setAlert] = useState('');
 
   const [signup, { isError, isSuccess, isLoading, data }] = useSignupMutation();
 
-  const handleSignup = (e) => {
+  const handleSignup = async (e) => {
     e.preventDefault();
     const user = {
       email: e.target[0].value,
@@ -20,8 +18,12 @@ export default function Signup() {
       setAlert({ error: "passwords are not same!" });
       return;
     }
-
-    signup({ email: user.email, name: user.username, password: user.password });
+    try {
+      await signup({ email: user.email, name: user.username, password: user.password }).unwrap();
+    } catch (error) {
+      setAlert(error.data.error)
+    }
+    
   };
 
   return (
@@ -53,7 +55,7 @@ export default function Signup() {
             ></path>
           </svg>
           <div>
-            <span className="font-medium">Signup Failed!</span> Account is already exsiting!
+            <span className="font-medium">Signup Failed!</span> {alert}
           </div>
         </div>
       )}

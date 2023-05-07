@@ -15,7 +15,7 @@ import { setUser } from "../../store/userSlice";
 export default function Myblog() {
   const {currUser} = useSelector((state) => state.user);
   const { userid } = useParams();
-  const isUser = userid === currUser._id;
+  const isUser = userid === currUser?._id;
   const currUserId = userid;
   const loginUserId = currUser._id;
   const { data, isError:isCurrUserError,isSuccess:isCurrUserSuccess, isLoading:isCurrUserLoading } = useGetuserByIdQuery(currUserId);
