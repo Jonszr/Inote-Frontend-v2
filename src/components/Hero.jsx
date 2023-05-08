@@ -1,9 +1,10 @@
 import React from 'react'
 import {
-    CloudUploadIcon,
+    
     DatabaseIcon,
-    PaperAirplaneIcon,
+    CodeIcon,
     ServerIcon,
+    DesktopComputerIcon
 } from '@heroicons/react/solid';
 import bgImg from '../assets/logo.png'
 import { useNavigate } from 'react-router-dom';
@@ -30,10 +31,10 @@ export default function Hero() {
             border border-slate-300 rounded-xl  text-center shadow-xl'>
                 <p>Let's sharing what did you learn about programing!</p>
                 <div className='flex flex-wrap justify-between px-4'>
-                    <p className='flex px-4 py-2 text-slate-500'><CloudUploadIcon className='h-6 text-indigo-600'/> App Security</p>
+                    <p className='flex px-4 py-2 text-slate-500'><DesktopComputerIcon className='h-6 text-indigo-600'/> App Security</p>
                     <p className='flex px-4 py-2 text-slate-500'><DatabaseIcon className='h-6 text-indigo-600'/> Database </p>
                     <p className='flex px-4 py-2 text-slate-500'><ServerIcon className='h-6 text-indigo-600'/> Backend Server</p>
-                    <p className='flex px-4 py-2 text-slate-500'><PaperAirplaneIcon className='h-6 text-indigo-600'/> App Security</p>
+                    <p className='flex px-4 py-2 text-slate-500'><CodeIcon className='h-6 text-indigo-600'/> Coding</p>
                     
                 </div>
             </div>
@@ -42,3 +43,4 @@ export default function Hero() {
     </div>
   )
 }
+

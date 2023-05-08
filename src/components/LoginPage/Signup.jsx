@@ -4,7 +4,7 @@ import { useSignupMutation } from "../../store/userApi";
 export default function Signup() {
   const [alert, setAlert] = useState('');
 
-  const [signup, { isError, isSuccess, isLoading, data }] = useSignupMutation();
+  const [signup, { isError, isSuccess }] = useSignupMutation();
 
   const handleSignup = async (e) => {
     e.preventDefault();

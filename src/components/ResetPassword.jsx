@@ -1,13 +1,16 @@
-import React, { useState } from "react";
-import { useForgotPasswordMutation } from "../store/userApi";
-export default function Forgetpwd() {
-  const [forgotPassword, { isSuccess, isError, data, error }] =
-    useForgotPasswordMutation();
-  const handleSendEmail = async (e) => {
-    e.preventDefault();
-    const email = e.target[0].value;
+import React from "react";
+import { useResetPasswordMutation } from "../store/userApi";
 
-    await forgotPassword({ email: email }).unwrap();
+const ResetPassword = () => {
+  const [alert, setAlert] = useState("");
+  const { token } = useParams();
+  const [resetPassword, { error, data, isError, isSuccess }] = useResetPasswordMutation();
+  const handleResetPassword = async (e) => {
+    e.preventDefault();
+    const newPass = e.target[0].value;
+    const repeatNewPass = e.target[0].value;
+    newPass !== repeatNewPass && setAlert("passwords are not same!");
+    await resetPassword({ newPass, token });
   };
   return (
     <div className="w-full xl:w-7/12 px-4 shadow-lg rounded-lg bg-blueGray-500 border-0 py-4">
@@ -41,22 +44,36 @@ export default function Forgetpwd() {
           </div>
         </div>
       )}
-      <form onSubmit={handleSendEmail}>
+      <form onSubmit={handleResetPassword}>
         <h1 className="text-center font-bold text-xl px-6">
-          Enter the email to receive the reset password link
+          Choose your new Password!
         </h1>
+
         <div className="mb-6">
           <label
-            for="email"
+            for="password"
             className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
           >
-            Email
+            New password
           </label>
           <input
-            type="email"
-            id="email"
+            type="password"
+            id="password"
             className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light"
-            placeholder="name@flowbite.com"
+            required
+          />
+        </div>
+        <div className="mb-6">
+          <label
+            for="repeat-password"
+            className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+          >
+            Repeat password
+          </label>
+          <input
+            type="password"
+            id="repeat-password"
+            className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light"
             required
           />
         </div>
@@ -69,4 +86,6 @@ export default function Forgetpwd() {
       </form>
     </div>
   );
-}
+};
+
+export default ResetPassword;

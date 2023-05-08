@@ -40,7 +40,6 @@ export default function Navbar() {
         <div className={currentUser ? "hidden" : "hidden md:flex  mr-12"}>
           <button
             onClick={() => {
-              handleimgMenuSwitch();
               navigate("/auth/signin")
             }}
             className="px-8 py-3 "

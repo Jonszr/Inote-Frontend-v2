@@ -161,6 +161,15 @@ const userApi = createApi({
                     }
                 }
             }),
+            resetPassword: build.mutation({
+                query({newPassword,resetPasswordLink}){
+                    return{
+                        url:`blog/reset-password`,
+                        method:'put',
+                        body:{newPassword,resetPasswordLink}
+                    }
+                }
+            })
 
 
         }
@@ -184,7 +193,8 @@ export const {
     useDeletePostMutation,
     useCreatePostMutation,
     useGetAllPublicPostsQuery,
-    useForgotPasswordMutation
+    useForgotPasswordMutation,
+    useResetPasswordMutation,
     
 } = userApi;
 

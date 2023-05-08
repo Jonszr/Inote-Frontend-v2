@@ -7,8 +7,7 @@ import { login } from "../../store/userSlice";
 export default function Signin() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [signin, { isError }] = useLoginMutation();
-  const [alert, setAlert] = useState();
+  const [signin, { isError,error }] = useLoginMutation();
   const location = useLocation()
   const from = location.state?.preLocation?.pathname || '/home';
   
@@ -21,14 +20,11 @@ export default function Signin() {
     if (user.email&&user.password) {
       try {
         const payload = await signin({ email: user.email, password: user.password }).unwrap();
-        console.log(payload)
         if(payload){
           dispatch(login(payload));
           navigate(from,{replace:true}) 
         }
       } catch (error) {
-        setAlert(error.data.error);
-        console.error('rejected', error);
       }
     }
   };
@@ -54,7 +50,7 @@ export default function Signin() {
               ></path>
             </svg>
             <div>
-              <span className="font-medium">login Failed!</span> {alert}
+              <span className="font-medium">login Failed! {error.data.error}</span> 
             </div>
           </div>
         )}

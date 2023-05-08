@@ -86,6 +86,10 @@ export default [
             path: "forgetpwd",
             element: <Forgetpwd />,
           },
+          {
+            path: "reset-password/:token",
+            element: <Forgetpwd />,
+          },
         ],
       },
       ,
