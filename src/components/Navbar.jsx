@@ -39,18 +39,18 @@ export default function Navbar() {
     <div className="w-screen h-[90px] z-10 bg-zinc-900 fixed  drop-shadow-lg">
       <div className="px-2 flex justify-between items-center w-full h-full">
         <div className="flex items-center ">
+          <NavLink to={"/"}>
           <h1 className="text-3xl text-white font-bold mr-4 ml-10 sm:text-4xl">
             INOTE.
           </h1>
-          <ul className="hidden md:flex list-none text-zinc-400">
+          </NavLink>
+          
+          {/* <ul className="hidden md:flex list-none text-zinc-400">
             <li>
               <NavLink to={"/"}>Home</NavLink>
             </li>
 
-            {/* <li>
-              <NavLink to={"/usercenter"}>My Blogs</NavLink>
-            </li> */}
-          </ul>
+          </ul> */}
         </div>
 
         <div className={currentUser ? "hidden" : "hidden md:flex  mr-12"}>
@@ -64,10 +64,11 @@ export default function Navbar() {
             Sign In
           </button>
         </div>
+
         {currentUser && (
           <div
             className={"mr-4 md:mr-12 py-3  hover:cursor-pointer"}
-            onMouseEnter={handleimgMenuOpen}
+            
             onClick={handleimgMenuSwitch}
           >
             <img
@@ -89,33 +90,35 @@ export default function Navbar() {
           </div>
         )}
       </div>
-      {/* image menu */}
+
+
+      {/* image menu with user*/}
       {imgNav&&currentUser && (
         <ul
-          onPointerLeave={handleimgMenuClose}
+          // onPointerLeave={handleimgMenuClose}
           className={
-            "absolute bg-zinc-600 list-none  right-12  w-[300px] px-8 "
+            "absolute bg-zinc-600 list-none  md:right-12 md:w-[300px] w-full px-8 "
           }
         >
           <li className="p-4 border-b-2 border-zinc-300 w-full">
-            <NavLink to={"/home"}>Home</NavLink>
+            <NavLink onClick={handleimgMenuClose} to={"/"}>Home</NavLink>
           </li>
           <li className=" p-4 border-b-2 border-zinc-300   w-full">
-            <NavLink to={`/usercenter/${currentUser._id}`}>My Blogs</NavLink>
+            <NavLink onClick={handleimgMenuClose} to={`/usercenter/${currentUser._id}`}>My Blogs</NavLink>
           </li>
           <div className="flex flex-col my-4">
-            <NavLink onClick={handleSignout} to={"/home"}>
+            <NavLink onClick={handleSignout&&handleimgMenuClose} to={"/"}>
               <button className="px-8 py-3 w-full">logout</button>
             </NavLink>
           </div>
         </ul>
       )}
 
-      {/* small screen menu */}
+      {/* small screen menu in NoUser*/}
 
-      <ul className={!nav ? "hidden" : "absolute bg-zinc-200 list-none   w-full px-8"}>
+      <ul className={!nav&&currentUser ? "hidden" : "absolute bg-zinc-600 list-none md:right-12  w-full px-8"}>
         <li className=" p-4 border-b-2 border-zinc-300 w-full">
-          <NavLink onClick={handleClick} to={"/home"}>
+          <NavLink onClick={handleClick} to={"/"}>
             Home
           </NavLink>
         </li>
@@ -128,6 +131,9 @@ export default function Navbar() {
           </button>
         </div>
       </ul>
+          {/* small screen menu in User*/}
+
+
     </div>
   );
 }

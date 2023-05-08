@@ -36,7 +36,6 @@ export default function PostLists() {
 
           {/* lists of post cards */}
           <div className={postsdata.length? "grid grid-cols-1 md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-4":"flex justify-center"}>
-            {console.log(postsdata)}
             {postsdata.length? postsdata.map((post) => {
               return <PostCard key={post._id} post={post} isUser={isUser} />;
             }):(<div>Nothing here, Go created your own bolg!!</div>)}

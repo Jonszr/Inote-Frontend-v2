@@ -6,7 +6,7 @@ const SearchBar = ({setPostsData, posts}) => {
     e.preventDefault();
     console.log(e.target[0].value);
     const tempdata = posts.filter((post) => 
-      post.title.includes(e.target[0].value)
+      post.title.toLowerCase().includes(e.target[0].value.toLowerCase())
     );
     setPostsData(tempdata);
   }

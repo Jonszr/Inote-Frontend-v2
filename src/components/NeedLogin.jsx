@@ -6,8 +6,6 @@ const NeedLogin = (props)=> {
     
     const location = useLocation();
     const param = useParams();
-    // console.log(param)
-    // console.log(location)
     const userInfo = useSelector(state => state.user)
    return userInfo.isLogin? props.children : 
    <Navigate 
