@@ -12,12 +12,6 @@ export default function Navbar() {
   const [imgNav, setImgNav] = useState(false);
   const dispatch = useDispatch();
 
-  const handleimgMenuOpen = (e) => {
-    setImgNav(true);
-  };
-  const handleimgMenuClose = (e) => {
-    setImgNav(false);
-  };
   const handleimgMenuSwitch = (e) => {
     setImgNav(!imgNav);
   };
@@ -28,12 +22,8 @@ export default function Navbar() {
 
   const handleSignout = () => {
     dispatch(logout());
-    // setNav(!imgNav);
-    navigate("/home", { replace: true });
   };
 
-  // useEffect(() => {
-  // });
 
   return (
     <div className="w-screen h-[90px] z-10 bg-zinc-900 fixed  drop-shadow-lg">
@@ -45,18 +35,12 @@ export default function Navbar() {
           </h1>
           </NavLink>
           
-          {/* <ul className="hidden md:flex list-none text-zinc-400">
-            <li>
-              <NavLink to={"/"}>Home</NavLink>
-            </li>
-
-          </ul> */}
         </div>
 
         <div className={currentUser ? "hidden" : "hidden md:flex  mr-12"}>
           <button
             onClick={() => {
-              handleimgMenuClose();
+              handleimgMenuSwitch();
               navigate("/auth/signin")
             }}
             className="px-8 py-3 "
@@ -95,20 +79,19 @@ export default function Navbar() {
       {/* image menu with user*/}
       {imgNav&&currentUser && (
         <ul
-          // onPointerLeave={handleimgMenuClose}
           className={
             "absolute bg-zinc-600 list-none  md:right-12 md:w-[300px] w-full px-8 "
           }
         >
           <li className="p-4 border-b-2 border-zinc-300 w-full">
-            <NavLink onClick={handleimgMenuClose} to={"/"}>Home</NavLink>
+            <NavLink onClick={handleimgMenuSwitch} to={"/"}>Home</NavLink>
           </li>
           <li className=" p-4 border-b-2 border-zinc-300   w-full">
-            <NavLink onClick={handleimgMenuClose} to={`/usercenter/${currentUser._id}`}>My Blogs</NavLink>
+            <NavLink onClick={handleimgMenuSwitch} to={`/usercenter/${currentUser._id}`}>My Blogs</NavLink>
           </li>
           <div className="flex flex-col my-4">
-            <NavLink onClick={handleSignout&&handleimgMenuClose} to={"/"}>
-              <button className="px-8 py-3 w-full">logout</button>
+            <NavLink onClick={handleSignout} to={"/"} replace={true}>
+              <button onClick={handleimgMenuSwitch} className="px-8 py-3 w-full">logout</button>
             </NavLink>
           </div>
         </ul>
@@ -116,7 +99,7 @@ export default function Navbar() {
 
       {/* small screen menu in NoUser*/}
 
-      <ul className={!nav&&currentUser ? "hidden" : "absolute bg-zinc-600 list-none md:right-12  w-full px-8"}>
+      <ul className={!nav  ? "hidden" : "absolute bg-zinc-600 list-none md:right-12 md:w-[300px] w-full px-8"}>
         <li className=" p-4 border-b-2 border-zinc-300 w-full">
           <NavLink onClick={handleClick} to={"/"}>
             Home
@@ -132,8 +115,6 @@ export default function Navbar() {
         </div>
       </ul>
           {/* small screen menu in User*/}
-
-
     </div>
   );
 }

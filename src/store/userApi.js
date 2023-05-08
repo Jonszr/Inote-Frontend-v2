@@ -150,7 +150,18 @@ const userApi = createApi({
                 },
                 keepUnusedDataFor:60,
                 providesTags:['publicposts']
-            })
+            }),
+            forgotPassword: build.mutation({
+                query({email}){
+                    return{
+                        url: `blog/forgot-password`,
+                        method:'put',
+                        body:{email}
+
+                    }
+                }
+            }),
+
 
         }
     }
@@ -173,6 +184,7 @@ export const {
     useDeletePostMutation,
     useCreatePostMutation,
     useGetAllPublicPostsQuery,
+    useForgotPasswordMutation
     
 } = userApi;
 
