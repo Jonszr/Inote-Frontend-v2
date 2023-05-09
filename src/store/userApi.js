@@ -169,7 +169,34 @@ const userApi = createApi({
                         body:{newPassword,resetPasswordLink}
                     }
                 }
-            })
+            }),
+            comment: build.mutation({
+                query({comment,userId,postId}){
+                    return{
+                        url:`blog/post/comment`,
+                        method:'put',
+                        body:{comment,userId,postId}
+                    }
+                }
+            }),
+            uncomment: build.mutation({
+                query({postId,comment}){
+                    return{
+                        url:`blog/post/uncomment`,
+                        method:'put',
+                        body:{postId,comment}
+                    }
+                }
+            }),
+            updateComment:build.mutation({
+                query({postId,comment}){
+                    return{
+                        url:`blog/post/updatecomment`,
+                        method:'put',
+                        body:{postId,comment}
+                    }
+                }
+            }),
 
 
         }
