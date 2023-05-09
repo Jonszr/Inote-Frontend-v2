@@ -1,16 +1,24 @@
-import React from "react";
+import React, { useState } from "react";
+import { useParams } from "react-router-dom";
 import { useResetPasswordMutation } from "../store/userApi";
 
 const ResetPassword = () => {
   const [alert, setAlert] = useState("");
   const { token } = useParams();
-  const [resetPassword, { error, data, isError, isSuccess }] = useResetPasswordMutation();
+  const [resetPassword, { error, data, isError, isSuccess }] =
+    useResetPasswordMutation();
   const handleResetPassword = async (e) => {
     e.preventDefault();
     const newPass = e.target[0].value;
     const repeatNewPass = e.target[0].value;
     newPass !== repeatNewPass && setAlert("passwords are not same!");
-    await resetPassword({ newPass, token });
+
+    try {
+      await resetPassword({ newPassword:newPass, resetPasswordLink:token });
+    } catch (error) {
+      console.log(error)
+      setAlert(error.data.error);
+    }
   };
   return (
     <div className="w-full xl:w-7/12 px-4 shadow-lg rounded-lg bg-blueGray-500 border-0 py-4">
@@ -40,7 +48,7 @@ const ResetPassword = () => {
             ></path>
           </svg>
           <div>
-            <span className="font-medium">{error.data.error}</span>
+            <span className="font-medium">{alert}</span>
           </div>
         </div>
       )}

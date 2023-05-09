@@ -12,7 +12,7 @@ import NeedLogin from "../components/NeedLogin";
 import CreatePost from "../components/MyblogPage/CreatePost";
 import NeedAuth from "../components/NeedAuth";
 import Main from "../views/Main/main";
-
+import ResetPassword from "../components/ResetPassword";
 export default [
   //public routes
   {
@@ -88,7 +88,7 @@ export default [
           },
           {
             path: "reset-password/:token",
-            element: <Forgetpwd />,
+            element: <ResetPassword />,
           },
         ],
       },
