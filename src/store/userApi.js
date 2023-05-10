@@ -177,7 +177,8 @@ const userApi = createApi({
                         method:'put',
                         body:{comment,userId,postId}
                     }
-                }
+                },
+                invalidatesTags:['posts','publicposts']
             }),
             uncomment: build.mutation({
                 query({postId,comment}){
@@ -186,7 +187,8 @@ const userApi = createApi({
                         method:'put',
                         body:{postId,comment}
                     }
-                }
+                },
+                invalidatesTags:['posts','publicposts']
             }),
             updateComment:build.mutation({
                 query({postId,comment}){
@@ -195,7 +197,8 @@ const userApi = createApi({
                         method:'put',
                         body:{postId,comment}
                     }
-                }
+                },
+                invalidatesTags:['posts','publicposts']
             }),
 
 
@@ -222,6 +225,9 @@ export const {
     useGetAllPublicPostsQuery,
     useForgotPasswordMutation,
     useResetPasswordMutation,
+    useCommentMutation,
+    useUncommentMutation,
+    useUpdateCommentMutation,
     
 } = userApi;
 
