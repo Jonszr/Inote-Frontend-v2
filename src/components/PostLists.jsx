@@ -16,18 +16,17 @@ export default function PostLists() {
     postsdata: posts,
   } = useOutletContext();
   const [count, setCount] = useState(0);
-  const [postsdata, setPostsdata] = useState(posts.slice(0, 12));
+  const [postsdata, setPostsdata] = useState(posts?.slice(0, 12));
 
   useEffect(() => {
     setPostsdata((pts) => {
-      return posts.slice(0, 12);
+      return posts?.slice(0, 12);
     });
     console.log("posts changed");
   }, [posts]);
 
   return (
     <>
-      {postsError && <NotFound />}
       {isPostsSuccess ? (
         <div className=" w-full h-auto">
           {/* Search Bar */}

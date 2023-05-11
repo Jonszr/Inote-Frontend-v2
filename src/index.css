@@ -3,7 +3,9 @@
 @tailwind utilities;
 
 @layer base {
-
+  *{
+    font-family: 'Concert One', cursive;
+  }
   ul{
     @apply list-disc
   }

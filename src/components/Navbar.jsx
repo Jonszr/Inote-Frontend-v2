@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { MenuIcon, XIcon } from "@heroicons/react/outline";
 import { NavLink, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import defaultImg from "../assets/imgcard.jpg";
+import defaultImg from "../assets/DefaultHeadimg.jpg";
 import { logout } from "../store/userSlice";
 export default function Navbar() {
   const navigate = useNavigate();

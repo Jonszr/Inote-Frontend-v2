@@ -39,7 +39,7 @@ export default function Myblog() {
 //  },[data,isUser,isFetching,dispatch])
  
 //  console.log(postsdata)
-  
+  console.log(postsdata)
   return (
     <>
       {isCurrUserError||isPostsError||isLoginUserError && <NotFound />}

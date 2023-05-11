@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { useState } from "react";
 import { useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
-import defaultimg from "../../assets/imgcard.jpg";
+import defaultimg from "../../assets/DefaultHeadimg.jpg";
 import { useAddFollowMutation, useGetuserByIdQuery, useRemoveFollowMutation } from "../../store/userApi";
 
 function ProfileCard(props) {

@@ -13,7 +13,6 @@ export default function Home() {
     data: postsdata,
     isLoading:isPostsLoading
   } = useGetAllPublicPostsQuery();
-  
   return (
     <Fragment>
         <Hero/>

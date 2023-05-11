@@ -4,23 +4,24 @@ import "prismjs/themes/prism.min.css";
 import { useEffect } from "react";
 import { useState } from "react";
 import { useOutletContext, useParams } from "react-router-dom";
-import img from "../../assets/imgcard.jpg";
+import img from "../../assets/DefaultHeadimg.jpg";
 import CommentCard from "./CommentCard";
 import NotFound from "../../views/NotFound";
 import CommentSender from "./CommentSender";
 import { useSelector } from "react-redux";
 export default function BlogContent() {
-  const { postsdata } = useOutletContext();
+  const { postsdata, data } = useOutletContext();
   const { blogid } = useParams();
   const userInfo = useSelector(state => state.user);
   const [currPost, setCurrPost] = useState(null);
-  const [date, setDate] = useState('');
   useEffect(() => {
-    Prism.highlightAll();
     const tempdata = postsdata.find((post) => post._id === blogid);
-    setDate(new Date(tempdata.created).toLocaleDateString())
     setCurrPost(tempdata);
   }, [postsdata]);
+
+  useEffect(()=>{
+    Prism.highlightAll();
+  })
 
   return (
     <>
@@ -38,7 +39,7 @@ export default function BlogContent() {
             <div className="flex justify-center">
               <img
                 className="h-20 w-20 object-cover  rounded-full"
-                src={img}
+                src={data.photo?  data.photo.photoURL : img}
                 alt="Rounded avatar"
               />
               <div className="text-center text-md self-center  ml-5">
@@ -47,7 +48,7 @@ export default function BlogContent() {
                   Created Date:
                   {/* {`${createdate[1]}-${createdate[2]}-${createdate[3]}`} */}
                 </p>
-                <p className="">{date}</p>
+                <p className="">{new Date(currPost.created).toLocaleDateString()}</p>
               </div>
             </div>
             <div className=" p-8 rounded-lg max-w-5xl bg-white border border-zinc-300  mt-10">
