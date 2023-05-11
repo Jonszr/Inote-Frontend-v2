@@ -6,7 +6,7 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/dist/query/react'
 const userApi = createApi({
     reducerPath: 'userApi', // Api的标识，不能和其他的Api或reducer重复
     baseQuery: fetchBaseQuery({
-        baseUrl: `https://inote-backend.herokuapp.com/blogserver/` ,
+        baseUrl: `/blogserver/` ,
 
         prepareHeaders: (headers, { getState }) => {
 
