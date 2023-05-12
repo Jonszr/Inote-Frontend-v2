@@ -27,19 +27,9 @@ export default function Myblog() {
     data: postsdata,
     isLoading:isPostsLoading
   } = useGetPostsByUserQuery(userid);
-  // const dispatch = useDispatch();
-//  useEffect(()=>{
-
-//   const updateUser = ()=>{
-//     if(data&&isUser&&!isFetching){
-//       dispatch(setUser({user:data}))
-//     }
-//   }
-//   updateUser();
-//  },[data,isUser,isFetching,dispatch])
- 
-//  console.log(postsdata)
-  console.log(postsdata)
+const handleScrollUp = ()=>{
+  window.scrollTo(0,0);
+}
   return (
     <>
       {isCurrUserError||isPostsError||isLoginUserError && <NotFound />}
@@ -66,10 +56,10 @@ export default function Myblog() {
                   </div>
                 </div>
               </div>
-              <div className=" flex justify-center items-center w-20 h-20 sticky bottom-[10%] rounded-full left-[90%] bg-white border border-solid border-indigo-600 mb-20">
+              <div onClick={handleScrollUp} className=" flex justify-center items-center w-10 h-10 sticky bottom-[10%] rounded-full left-[90%] bg-white border border-solid  mb-20">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
-                  className="h-10 w-10"
+                  className="h-7 w-10 hover:h-10"
                   fill="none"
                   viewBox="0 0 24 24"
                   stroke="currentColor"
