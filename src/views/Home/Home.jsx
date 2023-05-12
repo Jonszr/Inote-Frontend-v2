@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react'
+import React, { Fragment, useEffect } from 'react'
 import { Outlet } from 'react-router-dom'
 import Hero from '../../components/Hero'
 import { useGetAllPublicPostsQuery } from '../../store/userApi'
@@ -13,6 +13,9 @@ export default function Home() {
     data: postsdata,
     isLoading:isPostsLoading
   } = useGetAllPublicPostsQuery();
+  useEffect(()=>{
+    console.log(postsError,postsdata)
+  })
   return (
     <Fragment>
         <Hero/>
