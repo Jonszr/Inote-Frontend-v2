@@ -15,7 +15,7 @@ const CommentSender = ({userId, postId}) => {
     <div className=" border border-zinc-300 p-8 my-8 rounded-2xl">
               <form onSubmit={handleComment}>
                 <label className="sr-only">Your message</label>
-                <div className="flex items-center py-2 px-3 bg-gray-50 rounded-lg dark:bg-gray-700">
+                <div className="flex items-center  rounded-lg dark:bg-gray-700">
                   {/* <button
                     type="button"
                     className="inline-flex justify-center p-2 text-gray-500 rounded-lg cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600"
@@ -58,7 +58,7 @@ const CommentSender = ({userId, postId}) => {
                   ></textarea>
                   <button
                     type="submit"
-                    className="inline-flex justify-center p-2 text-blue-600 rounded-full cursor-pointer hover:bg-blue-100 dark:text-blue-500 dark:hover:bg-gray-600"
+                    className="inline-flex justify-center p-2 text-blue-600 hover:text-blue-300 border-0 rounded-full cursor-pointer  dark:text-blue-500 dark:hover:bg-gray-600"
                   >
                     <svg
                       className="w-6 h-6 rotate-90"

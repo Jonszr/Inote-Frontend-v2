@@ -38,7 +38,7 @@ const handleScrollUp = ()=>{
       ) : (
         <div className="h-auto bg-zinc-200">
           <div className=" flex pt-20">
-            <div className=" h-auto w-screen flex flex-col px-[15%] gap-y-4">
+            <div className=" h-auto w-screen flex flex-col md:px-[15%] px-0 gap-y-4">
               <div className="h-auto ">
                 <Banner data={data}/>
               </div>

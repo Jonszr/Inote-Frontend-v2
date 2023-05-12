@@ -27,7 +27,7 @@ export default function BlogContent() {
     <>
       {currPost ? (
         <div className="w-full mt-4  h-auto">
-          <div className="w-full h-auto p-8 bg-white rounded-lg">
+          <div className="w-full h-auto md:p-8 p-0 bg-white rounded-lg">
             <h1 className=" py-8 font-mono font-bold text-6xl text-center">
               {currPost.title}
             </h1>
