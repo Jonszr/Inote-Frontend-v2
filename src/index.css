@@ -5,6 +5,7 @@
 @layer base {
   *{
     font-family: 'Concert One', cursive;
+    font-family: 'Dosis', sans-serif;
   }
   ul{
     @apply list-disc
