@@ -91,12 +91,7 @@ export default [
             element: <ResetPassword />,
           },
         ],
-      },
-      ,
-      {
-        path: "*",
-        element: <Navigate to={"/"} />,
-      },
+      }
     ],
   },
 ];
