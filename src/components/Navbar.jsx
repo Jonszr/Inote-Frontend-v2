@@ -106,11 +106,13 @@ export default function Navbar() {
         </li>
 
         <div className=" p-4 flex flex-col my-4">
-          <button className="px-8 py-3">
+          
             <NavLink onClick={handleClick} to={"/auth/signin"}>
+            <button className="px-8 py-3">
               Login
+              </button>
             </NavLink>
-          </button>
+          
         </div>
       </ul>
           {/* small screen menu in User*/}
