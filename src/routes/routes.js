@@ -34,9 +34,9 @@ export default [
       {
         path: "usercenter/:userid",
         element: (
-          <NeedLogin>
+          
             <Myblog />
-          </NeedLogin>
+          
         ),
         children: [
           {
@@ -46,9 +46,12 @@ export default [
           {
             path: "editprofile",
             element: (
-              <NeedAuth>
+              <NeedLogin>
+                <NeedAuth>
                 <EditPorfile />
               </NeedAuth>
+              </NeedLogin>
+              
             ),
           },
           {
@@ -58,9 +61,12 @@ export default [
           {
             path: "blogeditor",
             element: (
-              <NeedAuth>
+              <NeedLogin>
+                <NeedAuth>
                 <CreatePost />
               </NeedAuth>
+              </NeedLogin>
+              
             ),
           },
         ],

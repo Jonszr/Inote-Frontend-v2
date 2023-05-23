@@ -12,7 +12,8 @@ const CommentCard = ({ comment }) => {
   const {userid,blogid} = useParams();
   const postedByUserId = comment.postedBy
   const userInfo= useSelector(state => state.user);
-  const isUser = (userInfo.currUser._id === userid) || (userInfo.currUser._id === postedByUserId);
+  const loginUserId = userInfo?.currUser?._id;
+  const isUser = (loginUserId === userid) || (loginUserId === postedByUserId);
   const { text, postedBy, created } = comment;
   const {
     error,
@@ -21,9 +22,6 @@ const CommentCard = ({ comment }) => {
     isSuccess: isCurrUserSuccess,
     isLoading: isCurrUserLoading,
   } = useGetuserByIdQuery(postedBy);
-  useEffect(()=>{
-    console.log(userInfo.currUser._id , userid , postedByUserId)
-  },[])
 
   const handleUncomment = async ()=>{
     try {

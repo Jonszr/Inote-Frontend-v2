@@ -1,22 +1,30 @@
-import React from 'react'
-import { useCommentMutation } from '../../store/userApi'
+import React from "react";
+import { useNavigate } from "react-router-dom";
+import { useCommentMutation } from "../../store/userApi";
 
-const CommentSender = ({userId, postId}) => {
-    const [comment,{}]= useCommentMutation();
-    const handleComment = async (e)=>{
-        e.preventDefault();
-        try {
-            await comment({comment:{text:e.target[0].value},userId:userId,postId:postId})
-        } catch (error) {
-            console.log(error)
-        }
+const CommentSender = ({ userId, postId }) => {
+  const [comment, {}] = useCommentMutation();
+  const navigate = useNavigate();
+  const handleComment = async (e) => {
+    e.preventDefault();
+    try {
+      userId
+        ? await comment({
+            comment: { text: e.target[0].value },
+            userId: userId,
+            postId: postId,
+          })
+        : navigate("/auth/signin");
+    } catch (error) {
+      console.log(error);
     }
+  };
   return (
     <div className=" border border-zinc-300 p-8 my-8 rounded-2xl">
-              <form onSubmit={handleComment}>
-                <label className="sr-only">Your message</label>
-                <div className="flex items-center  rounded-lg dark:bg-gray-700">
-                  {/* <button
+      <form onSubmit={handleComment}>
+        <label className="sr-only">Your message</label>
+        <div className="flex items-center  rounded-lg dark:bg-gray-700">
+          {/* <button
                     type="button"
                     className="inline-flex justify-center p-2 text-gray-500 rounded-lg cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600"
                   >
@@ -50,29 +58,29 @@ const CommentSender = ({userId, postId}) => {
                       ></path>
                     </svg>
                   </button> */}
-                  <textarea
-                    id="chat"
-                    rows="1"
-                    className="block mx-4 p-2.5 w-full text-sm text-gray-900 bg-white rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-800 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                    placeholder="Your comment..."
-                  ></textarea>
-                  <button
-                    type="submit"
-                    className="inline-flex justify-center p-2 text-blue-600 hover:text-blue-300 border-0 rounded-full cursor-pointer  dark:text-blue-500 dark:hover:bg-gray-600"
-                  >
-                    <svg
-                      className="w-6 h-6 rotate-90"
-                      fill="currentColor"
-                      viewBox="0 0 20 20"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path d="M10.894 2.553a1 1 0 00-1.788 0l-7 14a1 1 0 001.169 1.409l5-1.429A1 1 0 009 15.571V11a1 1 0 112 0v4.571a1 1 0 00.725.962l5 1.428a1 1 0 001.17-1.408l-7-14z"></path>
-                    </svg>
-                  </button>
-                </div>
-              </form>
-            </div>
-  )
-}
+          <textarea
+            id="chat"
+            rows="1"
+            className="block mx-4 p-2.5 w-full text-sm text-gray-900 bg-white rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-800 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            placeholder="Your comment..."
+          ></textarea>
+          <button
+            type="submit"
+            className="inline-flex justify-center p-2 text-blue-600 hover:text-blue-300 border-0 rounded-full cursor-pointer  dark:text-blue-500 dark:hover:bg-gray-600"
+          >
+            <svg
+              className="w-6 h-6 rotate-90"
+              fill="currentColor"
+              viewBox="0 0 20 20"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path d="M10.894 2.553a1 1 0 00-1.788 0l-7 14a1 1 0 001.169 1.409l5-1.429A1 1 0 009 15.571V11a1 1 0 112 0v4.571a1 1 0 00.725.962l5 1.428a1 1 0 001.17-1.408l-7-14z"></path>
+            </svg>
+          </button>
+        </div>
+      </form>
+    </div>
+  );
+};
 
-export default CommentSender
+export default CommentSender;

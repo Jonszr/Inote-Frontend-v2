@@ -19,7 +19,7 @@ export default function Myblog() {
   const currUserId = userid;
   const loginUserId = currUser?._id;
   const { data, isError:isCurrUserError,isSuccess:isCurrUserSuccess, isLoading:isCurrUserLoading } = useGetuserByIdQuery(currUserId);
-  const { data:loginUserData, isError:isLoginUserError, isLoading:isLoginUserLoading } = useGetuserByIdQuery(loginUserId);
+  const{ data:loginUserData, isError:isLoginUserError, isLoading:isLoginUserLoading } = useGetuserByIdQuery(loginUserId,{skip:!loginUserId});
   const {
     isSuccess:isPostsSuccess,
     error:postsError,
@@ -32,7 +32,7 @@ const handleScrollUp = ()=>{
 }
   return (
     <>
-      {isCurrUserError||isPostsError||isLoginUserError && <NotFound />}
+      {isCurrUserError||isPostsError && <NotFound />}
       {isCurrUserLoading||isPostsLoading||isLoginUserLoading ? (
         <Loading />
       ) : (
@@ -43,7 +43,7 @@ const handleScrollUp = ()=>{
                 <Banner data={data}/>
               </div>
               <div className="h-auto flex flex-row flex-wrap lg:flex-nowrap lg:flex lg:gap-4">
-                <div className="w-full h-auto lg:order-1 lg:w-full mb-20 order-2">
+                <div className="w-full h-auto lg:order-1 lg:w-full mb-20 order-2 max-w-[70%]">
                   <Outlet context={{data, isUser,isPostsSuccess,postsError,postsdata }} />
                 </div>
 
@@ -51,7 +51,7 @@ const handleScrollUp = ()=>{
                   {/* side bar */}
 
                   <div className="w-full sticky top-40">
-                    <ProfileCard isUser={isUser} loginUserData = {loginUserData} data={data} postsdata={postsdata}  />
+                    <ProfileCard isUser={isUser} loginUserData = {loginUserData? loginUserData:null} data={data} postsdata={postsdata}  />
                     <SideBar isUser={isUser} />
                   </div>
                 </div>

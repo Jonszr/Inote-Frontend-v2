@@ -13,6 +13,7 @@ export default function BlogContent() {
   const { postsdata, data } = useOutletContext();
   const { blogid } = useParams();
   const userInfo = useSelector(state => state.user);
+  const userId = userInfo?.currUser?._id;
   const [currPost, setCurrPost] = useState(null);
   useEffect(() => {
     const tempdata = postsdata.find((post) => post._id === blogid);
@@ -70,7 +71,7 @@ export default function BlogContent() {
               {currPost.comments.map((comment)=><CommentCard key={comment._id} comment={comment}/>
               )}
             </div>
-              <CommentSender userId={userInfo.currUser._id} postId={blogid}/>
+              <CommentSender userId={userId} postId={blogid}/>
             
           </div>
         </div>

@@ -1,23 +1,25 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
 import { useSelector } from "react-redux";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import defaultimg from "../../assets/DefaultHeadimg.jpg";
 import { useAddFollowMutation, useGetuserByIdQuery, useRemoveFollowMutation } from "../../store/userApi";
+import NeedLogin from "../NeedLogin";
 
 function ProfileCard(props) {
   const { isUser,loginUserData, data,postsdata } = props;
   const { _id,name, photo, followers, following } = data;
+  const navigate = useNavigate();
   const [addFollow] = useAddFollowMutation();
   const [removeFollow] = useRemoveFollowMutation();
-  const findUserFromFollowing = loginUserData.following.find(user =>user._id === _id)
-  const findUserFromFollowers = followers.find(user => user._id === loginUserData._id)
+  const findUserFromFollowing = loginUserData?.following.find(user =>user._id === _id)
+  const findUserFromFollowers = followers?.find(user => user._id === loginUserData?._id)
   const isBothConnect = findUserFromFollowers&& findUserFromFollowing
   // console.log(data,loginUserData);
   // console.log(findUserFromFollowers,findUserFromFollowing,isBothConnect);
 
   const followUser = ()=>{
-    addFollow({followId:_id})
+    loginUserData? addFollow({followId:_id}):navigate('/auth/signin');
   }
   const unFollowUser = ()=>{
     removeFollow({unfollowId:_id})
