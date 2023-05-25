@@ -26,7 +26,7 @@ export default function PostCard({ post, isUser }) {
 
   return (
     <div className="w-full relative">
-      <div className="w-full overflow-hidden shadow-lg rounded-xl h-90  md:w-auto  m-auto">
+      <div className="w-full h-full overflow-hidden shadow-lg rounded-xl h-90  md:w-auto  m-auto">
         <NavLink
           to={{
             pathname: `/usercenter/${post.postedBy.name}/blogdetail/${post._id}`,
@@ -36,11 +36,11 @@ export default function PostCard({ post, isUser }) {
           <img
             alt="blog photo"
             src={post.photo ? post.photo.photoURL : imgCard}
-            className="max-h-40 cursor-pointer w-full object-cover"
+            className="max-h-40 cursor-pointer w-full h-full object-cover"
           />
         </NavLink>
 
-        <div className="bg-white dark:bg-gray-800 w-full p-4">
+        <div className="bg-white dark:bg-gray-800 w-full h-full px-4 pt-4 pb-4 ">
           <NavLink
             to={{
               pathname: `/usercenter/${post.postedBy.name}/blogdetail/${post._id}`,
@@ -50,12 +50,12 @@ export default function PostCard({ post, isUser }) {
             {/* <p className="text-indigo-500 text-md font-medium">
                               Video
                           </p> */}
-            <p className="text-gray-800 dark:text-white text-xl font-medium mb-2">
+            <p className="text-gray-800 dark:text-white text-xl font-medium mb-2 overflow-clip max-h-7">
               {post.title}
             </p>
             <p
               dangerouslySetInnerHTML={{ __html: post.body }}
-              className="truncate w-50 h-6 text-gray-400 dark:text-gray-300 font-light text-md"
+              className="truncate w-50 h-6 text-gray-400 dark:text-gray-300 font-light text-md max-h-6"
             ></p>
           </NavLink>
           <div className=" relative flex items-center mt-4">
@@ -108,12 +108,12 @@ export default function PostCard({ post, isUser }) {
       </div>
       {menu && (
         <div
-          onPointerLeave={handleCloseMenu}
+          onClick={handleDeletePost}
+          
           className="absolute bottom--10 right-0 z-10 max-w-44 w-22 bg-white rounded divide-y divide-gray-100 shadow"
         >
           <ul className="py-1 text-sm text-gray-700">
             <li
-              onClick={handleDeletePost}
               
               className=" cursor-pointer block py-2 px-4 text-red-600 text-center hover:bg-red-600 hover:text-white"
             >
