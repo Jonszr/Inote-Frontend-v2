@@ -6,6 +6,7 @@ import BlogEditor from "./BlogEditor";
 export const CreatePost = () => {
   const [content, setContent] = useState('');
   const { userid} = useOutletContext();
+  const {username } = useParams();
   const navigate = useNavigate();
 
   const setPostContent = (content) => {
@@ -28,7 +29,7 @@ export const CreatePost = () => {
     postTitle.value&&post.append('title',postTitle.value);
     content.value&&post.append('body',content.value);
     createPost({userId:userid,post:post})
-    navigate("/usercenter/" + userid);
+    navigate("/usercenter/" + username);
   }
 
   return (
