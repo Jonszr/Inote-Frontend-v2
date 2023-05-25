@@ -58,7 +58,7 @@ export const CreatePost = () => {
               Cover Image
             </label>
             <input
-              type={'file'}
+              type={'image'}
              
               
               
