@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
 import { useSelector } from "react-redux";
-import { NavLink, useNavigate } from "react-router-dom";
+import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import defaultimg from "../../assets/DefaultHeadimg.jpg";
 import { useAddFollowMutation, useGetuserByIdQuery, useRemoveFollowMutation } from "../../store/userApi";
 import NeedLogin from "../NeedLogin";
@@ -10,6 +10,7 @@ function ProfileCard(props) {
   const { isUser,loginUserData, data,postsdata } = props;
   const { _id,name, photo, followers, following } = data;
   const navigate = useNavigate();
+  const location = useLocation();
   const [addFollow] = useAddFollowMutation();
   const [removeFollow] = useRemoveFollowMutation();
   const findUserFromFollowing = loginUserData?.following.find(user =>user._id === _id)
@@ -19,7 +20,7 @@ function ProfileCard(props) {
   // console.log(findUserFromFollowers,findUserFromFollowing,isBothConnect);
 
   const followUser = ()=>{
-    loginUserData? addFollow({followId:_id}):navigate('/auth/signin');
+    loginUserData? addFollow({followId:_id}):navigate('/auth/signin', {state:{preLocation:location}});
   }
   const unFollowUser = ()=>{
     removeFollow({unfollowId:_id})

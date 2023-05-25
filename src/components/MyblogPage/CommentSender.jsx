@@ -1,10 +1,11 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useCommentMutation } from "../../store/userApi";
 
 const CommentSender = ({ userId, postId }) => {
   const [comment, {}] = useCommentMutation();
   const navigate = useNavigate();
+  const location = useLocation();
   const handleComment = async (e) => {
     e.preventDefault();
     try {
@@ -14,7 +15,7 @@ const CommentSender = ({ userId, postId }) => {
             userId: userId,
             postId: postId,
           })
-        : navigate("/auth/signin");
+        : navigate('/auth/signin', {state:{preLocation:location}});
     } catch (error) {
       console.log(error);
     }

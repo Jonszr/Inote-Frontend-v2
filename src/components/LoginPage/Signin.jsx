@@ -9,12 +9,13 @@ export default function Signin() {
   const navigate = useNavigate();
   const [signin, { isError,error }] = useLoginMutation();
   const location = useLocation()
-  const from = location.state?.preLocation?.pathname || '/home';
+  const from = location.state?.preLocation?.pathname || '/';
   
 
 
   const handleSignin = async(e) => {
     e.preventDefault();
+    console.log(location)
     console.log(from);
     const user = { email: e.target[0].value, password: e.target[1].value };
     if (user.email&&user.password) {
