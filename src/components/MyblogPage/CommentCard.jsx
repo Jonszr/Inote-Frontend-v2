@@ -42,7 +42,7 @@ const CommentCard = ({ comment,currUserId }) => {
                 src={
                   data.photo
                     ? data.photo.photoURL
-                    : require("../../assets/imgcard.jpg")
+                    : require("../../assets/DefaultHeadimg.jpg")
                 }
                 alt=""
               />
