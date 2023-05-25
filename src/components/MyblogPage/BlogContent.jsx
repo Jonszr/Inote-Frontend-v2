@@ -11,7 +11,7 @@ import CommentSender from "./CommentSender";
 import { useSelector } from "react-redux";
 
 export default function BlogContent() {
-  const { postsdata, data } = useOutletContext();
+  const { postsdata, data,userid:currUserId } = useOutletContext();
   const { blogid } = useParams();
   const userInfo = useSelector((state) => state.user);
   const userId = userInfo?.currUser?._id;
@@ -75,7 +75,7 @@ export default function BlogContent() {
 
             <div className=" grid grid-cols-1 divide-y border border-zinc-300 px-8 my-8 rounded-2xl">
               {currPost.comments.map((comment) => (
-                <CommentCard key={comment._id} comment={comment} />
+                <CommentCard key={comment._id} currUserId={currUserId} comment={comment} />
               ))}
             </div>
             <CommentSender userId={userId} postId={blogid} />

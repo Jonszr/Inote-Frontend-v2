@@ -32,7 +32,7 @@ export default [
       },
       //private routes
       {
-        path: "usercenter/:userid",
+        path: "usercenter/:username",
         element: (
           
             <Myblog />

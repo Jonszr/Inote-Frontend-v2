@@ -4,7 +4,6 @@ import {
   useOutletContext,
 } from "react-router-dom";
 import Loading from "../views/Loading";
-import NotFound from "../views/NotFound";
 import PostCard from "./PostCard";
 import SearchBar from "./SearchBar";
 
@@ -12,7 +11,6 @@ export default function PostLists() {
   const {
     isUser,
     isPostsSuccess,
-    postsError,
     postsdata: posts,
   } = useOutletContext();
   const [count, setCount] = useState(0);

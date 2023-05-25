@@ -1,11 +1,11 @@
 import React, { useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useOutletContext, useParams } from "react-router-dom";
 import { useCreatePostMutation } from "../../store/userApi";
 import BlogEditor from "./BlogEditor";
 
 export const CreatePost = () => {
   const [content, setContent] = useState('');
-  const param = useParams();
+  const { userid} = useOutletContext();
   const navigate = useNavigate();
 
   const setPostContent = (content) => {
@@ -27,8 +27,8 @@ export const CreatePost = () => {
     }
     postTitle.value&&post.append('title',postTitle.value);
     content.value&&post.append('body',content.value);
-    createPost({userId:param.userid,post:post})
-    navigate("/usercenter/" + param.userid);
+    createPost({userId:userid,post:post})
+    navigate("/usercenter/" + userid);
   }
 
   return (

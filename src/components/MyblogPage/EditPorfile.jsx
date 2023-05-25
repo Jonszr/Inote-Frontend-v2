@@ -1,15 +1,14 @@
-import { computeHeadingLevel } from "@testing-library/react";
+
 import React, { useState } from "react";
-import { useEffect } from "react";
-import { Navigate, useLocation, useNavigate, useOutletContext } from "react-router-dom";
+import {useNavigate, useOutletContext } from "react-router-dom";
 import { useUpdateUserMutation } from "../../store/userApi";
 import { useDispatch } from "react-redux";
 import { setUser } from "../../store/userSlice";
 
 export default function () {
   const navigate = useNavigate();
-  const { isUser, data} = useOutletContext();
-  const [updateUser, { isLoading,data:fetchdata,isSuccess}] = useUpdateUserMutation();
+  const { data} = useOutletContext();
+  const [updateUser] = useUpdateUserMutation();
   const [img, setImg] = useState();
   const dispatch = useDispatch();
   const onImageChange = (e) => {

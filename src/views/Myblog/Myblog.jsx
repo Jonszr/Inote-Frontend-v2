@@ -1,34 +1,46 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Banner from "../../components/MyblogPage/Banner";
 
 import ProfileCard from "../../components/MyblogPage/ProfileCard";
 
-import { Outlet, useParams } from "react-router-dom";
+import { Outlet, useLocation, useParams } from "react-router-dom";
 import SideBar from "../../components/SideBar";
-import {useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 
 import {
   useGetPostsByUserQuery,
   useGetuserByIdQuery,
+  useGetuserByNameQuery,
 } from "../../store/userApi";
 import Loading from "../Loading";
 import NotFound from "../NotFound";
 
 export default function Myblog() {
   const { currUser } = useSelector((state) => state.user);
-  const { userid } = useParams();
-  const isUser = userid === currUser?._id;
-  const currUserId = userid;
+  const { username } = useParams();
+
+
+  const [isUser, setIsUser] = useState(false);
+  
   const loginUserId = currUser?._id;
+  
   const {
     data,
     isError: isCurrUserError,
-    isSuccess: isCurrUserSuccess,
     isLoading: isCurrUserLoading,
-  } = useGetuserByIdQuery(currUserId);
+    isSuccess:isCurrUserSuccess
+  } = useGetuserByNameQuery(username,{skip:!username});
+  console.log(username);
+
+  
+  useEffect(()=>{
+    if(isCurrUserSuccess){
+      setIsUser(data._id === loginUserId);
+    }
+  },[data])
+  
   const {
     data: loginUserData,
-    isError: isLoginUserError,
     isLoading: isLoginUserLoading,
   } = useGetuserByIdQuery(loginUserId, { skip: !loginUserId });
   const {
@@ -37,7 +49,9 @@ export default function Myblog() {
     isError: isPostsError,
     data: postsdata,
     isLoading: isPostsLoading,
-  } = useGetPostsByUserQuery(userid);
+  } = useGetPostsByUserQuery(data?._id,{skip:!data});
+
+
   const handleScrollUp = () => {
     window.scrollTo(0, 0);
   };
@@ -54,9 +68,10 @@ export default function Myblog() {
                 <Banner data={data} />
               </div>
               <div className="h-auto flex flex-row flex-wrap lg:flex-nowrap lg:flex lg:gap-4">
-                <div className="w-full h-auto lg:order-1 lg:w-full mb-20 order-2 lg:max-w-[70%] lg:p-0" >
+                <div className="w-full h-auto lg:order-1 lg:w-full mb-20 order-2 lg:max-w-[70%] lg:p-0 ">
                   <Outlet
                     context={{
+                      userid:data._id,
                       data,
                       isUser,
                       isPostsSuccess,

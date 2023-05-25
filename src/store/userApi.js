@@ -86,6 +86,14 @@ const userApi = createApi({
                 keepUnusedDataFor:60,
                 providesTags:['user']
             }),
+            //get public user by name
+            getuserByName: build.query({ //public search
+                query(username){
+                    return `blog/user/finduserbyname/${username}`;
+                },
+                keepUnusedDataFor:60,
+                providesTags:['user']
+            }),
             //get all posts of public by userid
             getPostsByUser: build.query({ //public search
                 query(userid){
@@ -228,6 +236,7 @@ export const {
     useCommentMutation,
     useUncommentMutation,
     useUpdateCommentMutation,
+    useGetuserByNameQuery,
     
 } = userApi;
 

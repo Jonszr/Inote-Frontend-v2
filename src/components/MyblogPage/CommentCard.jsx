@@ -7,9 +7,10 @@ import {
 import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 
-const CommentCard = ({ comment }) => {
+const CommentCard = ({ comment,currUserId }) => {
   const [unComment, {}] = useUncommentMutation();
-  const {userid,blogid} = useParams();
+  const {blogid} = useParams();
+  const userid = currUserId;
   const postedByUserId = comment.postedBy
   const userInfo= useSelector(state => state.user);
   const loginUserId = userInfo?.currUser?._id;

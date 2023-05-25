@@ -86,7 +86,7 @@ export default function Navbar() {
             <NavLink onClick={handleimgMenuSwitch} to={"/"}>Home</NavLink>
           </li>
           <li className=" p-4 border-b-2 border-zinc-300   w-full">
-            <NavLink onClick={handleimgMenuSwitch} to={`/usercenter/${currentUser._id}`}>My Blogs</NavLink>
+            <NavLink onClick={handleimgMenuSwitch} to={`/usercenter/${currentUser.name}`} state={{userid:currentUser._id}}>My Blogs</NavLink>
           </li>
           <div className="flex flex-col my-4">
             <NavLink onClick={handleSignout} to={"/"} replace={true}>
