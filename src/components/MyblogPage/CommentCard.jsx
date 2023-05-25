@@ -67,7 +67,7 @@ const CommentCard = ({ comment }) => {
                 Reviewed on <time dateTime="2017-03-03 19:00">{new Date(created).toLocaleDateString()}</time>
               </p>
             </footer>
-            <p className="mb-2 font-light text-gray-500 dark:text-gray-400 break-words">
+            <p className="mb-2 font-light text-gray-500 dark:text-gray-400 break-normal overflow-clip">
               {text}
             </p>
           </article>
