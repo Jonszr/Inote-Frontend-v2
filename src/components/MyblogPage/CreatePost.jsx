@@ -59,8 +59,8 @@ export const CreatePost = () => {
               Cover Image
             </label>
             <input
-              type={'image'}
-             
+              type={'file'}
+              accept="image/gif, image/jpg, image/jpeg, image/png"
               
               
               required

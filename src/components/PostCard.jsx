@@ -114,6 +114,7 @@ export default function PostCard({ post, isUser }) {
           <ul className="py-1 text-sm text-gray-700">
             <li
               onClick={handleDeletePost}
+              
               className=" cursor-pointer block py-2 px-4 text-red-600 text-center hover:bg-red-600 hover:text-white"
             >
               Delete
